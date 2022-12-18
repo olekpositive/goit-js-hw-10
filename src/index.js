@@ -44,7 +44,68 @@ function clearTemplate() {
     tag.countriesList.innerHTML = '';
 }
 
-function errorWarn() {
-    Notify.failure(`Oops, there is no country with that name`);
+function renderTemplate(elements) {
+    let template = '';
+    let tagTemplate = '';
+    clearTemplate();
+
+    if (elements.length === 1) {
+        template = createTemplateItem(elements);
+        tagTemplate = tag.countriesInfo;
+    } else {
+        template = createTemplateItemList(elements);
+        tagTemplate = tag.countriesList;
+    }
+
+    drawTemplate(tagTemplate, template);
 }
 
+function drawTemplate(tag, markup) {
+    tag.innerHTML = markup;
+}
+
+function createTemplateItem(element) {
+    return element.map(
+        ({ name, capital, population, flags, languages }) =>
+        `<img
+            src="${flags.svg}" 
+            alt="${name.official}" 
+            width="120" 
+            height="80">
+        <h1 class="country-info__title">${name.official}</h1>
+        <ul class="country-info__list">
+          <li class="country-info__item">
+          <span>Capital:</span>
+        ${capital}
+          </li>
+          <li class="country-info__item">
+          <span>Population:</span>
+          ${population}
+          </li>
+          <li class="country-info__item">
+          <span>Lenguages:</span>
+          ${Object.values(languages)}
+          </li>
+      </ul>`
+    );
+}
+
+function createTemplateItemList(elements) {
+    return elements
+        .map(
+            ({ name, flags }) => `
+      <li class="country-list__item">
+        <img class="country-list__img" 
+          src="${flags.svg}" 
+          alt="${name.official}" 
+          width="60" 
+          height="40">
+        ${name.official}
+      </li>`
+        )
+        .join('');
+}
+
+function errorWarn() {
+    Notify.failure(`Oops, there is no country with that name`)
+};
