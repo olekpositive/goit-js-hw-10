@@ -1,4 +1,4 @@
-import './css/styles.css';
+/* import './css/styles.css'; */
 import { fetchCountries } from './fetchCountries';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
@@ -35,14 +35,6 @@ function onInputChange(input) {
             errorWarn();
         });
 }
-function specificNameInfo() {
-    Notify.info('Too many matches found. Please enter a more specific name.');
-}
-
-function clearTemplate() {
-    tag.countriesInfo.innerHTML = '';
-    tag.countriesList.innerHTML = '';
-}
 
 function renderTemplate(elements) {
     let template = '';
@@ -58,10 +50,6 @@ function renderTemplate(elements) {
     }
 
     drawTemplate(tagTemplate, template);
-}
-
-function drawTemplate(tag, markup) {
-    tag.innerHTML = markup;
 }
 
 function createTemplateItem(element) {
@@ -106,6 +94,19 @@ function createTemplateItemList(elements) {
         .join('');
 }
 
+function specificNameInfo() {
+    Notify.info('Too many matches found. Please enter a more specific name.');
+}
+
+function clearTemplate() {
+    tag.countriesInfo.innerHTML = '';
+    tag.countriesList.innerHTML = '';
+}
+
+function drawTemplate(tag, markup) {
+    tag.innerHTML = markup;
+}
+
 function errorWarn() {
-    Notify.failure(`Oops, there is no country with that name`)
-};
+    Notify.failure(`Oops, there is no country with that name`);
+}
