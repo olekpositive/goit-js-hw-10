@@ -15,8 +15,9 @@ body {
 .country-list,
 .country-info__list {
   list-style: none;
-  padding: 0;
+  padding: 0 0 10px 0;
   max-width: 700px;
+  margin: 0;
 }
 
 .country-list__item {
@@ -27,15 +28,16 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(80, 238, 133, 0.6);
   border-radius: 5px;
 }
 
 .country-info {
+ 
   max-width: 500px;
   
-  padding-left: 20px;
-  background-color: rgba(255, 201, 101, 0.6);
+  padding-left: 15px;
+  background-color: rgba(80, 238, 133, 0.6);
   border-radius: 5px;
 }
 
@@ -50,4 +52,17 @@ body {
 
   font-size: 22px;
 
+}
+
+.country-list__img {
+  margin-right: 10px;
+}
+
+.country-info__title-name {
+  padding-left: 20px;
+}
+
+.country-info__title {
+  display: flex;
+  align-items: center;
 }

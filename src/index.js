@@ -1,6 +1,7 @@
 import { fetchCountries } from './fetchCountries';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
+import './css/styles.css';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -54,22 +55,23 @@ function renderTemplate(elements) {
 function createTemplateItem(element) {
     return element.map(
         ({ name, capital, population, flags, languages }) =>
-        `<img
+        `<div class="country-info__title"> <img
             src="${flags.svg}" 
-            alt="${name.official}" 
-            width="120" 
-            height="80">
-        <h1 class="country-info__title">${name.official}</h1>
+            alt="${name.common}" 
+            width="100" 
+            height="60">
+            <h1 class="country-info__title-name">${name.common}</h1>
+        </div>
         <ul class="country-info__list">
           <li class="country-info__item">
           <span>Capital:</span>
-        ${capital}
+          ${capital}
           </li>
           <li class="country-info__item">
           <span>Population:</span>
           ${population}
           </li>
-          <li class="country-info__item">
+          <li class= "country-info__item">
           <span>Lenguages:</span>
           ${Object.values(languages)}
           </li>
@@ -84,10 +86,10 @@ function createTemplateItemList(elements) {
       <li class="country-list__item">
         <img class="country-list__img" 
           src="${flags.svg}" 
-          alt="${name.official}" 
+          alt="${name.common}" 
           width="60" 
           height="40">
-        ${name.official}
+        ${name.common}
       </li>`
         )
         .join('');
