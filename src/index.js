@@ -13,9 +13,17 @@ const tag = {
 
 tag.countriesName.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
+
 function onInputChange(input) {
     const countryName = input.target.value.trim();
 
+    const specific = /^-| {2,}|[^\w\d\- ]|\-{2,}| \-{1,}|\-{1,} {1,}/gi;
+    const test = specific.test(countryName);
+    if (test) {
+        errorSpecificLetters();
+        clearTemplate();
+        return;
+    }
     if (!countryName) {
         clearTemplate();
         return;
@@ -55,7 +63,7 @@ function renderTemplate(elements) {
 function createTemplateItem(element) {
     return element.map(
         ({ name, capital, population, flags, languages }) =>
-        `<div class="country-info__title"> <img
+            `<div class="country-info__title"> <img
             src="${flags.svg}" 
             alt="${name.common}" 
             width="100" 
@@ -65,15 +73,15 @@ function createTemplateItem(element) {
         <ul class="country-info__list">
           <li class="country-info__item">
           <span>Capital:</span>
-          ${capital}
+          ${Object.values(capital).length > 0 ? capital : '-'}
           </li>
           <li class="country-info__item">
           <span>Population:</span>
           ${population}
           </li>
           <li class= "country-info__item">
-          <span>Lenguages:</span>
-          ${Object.values(languages)}
+          ${Object.values(languages).length > 1 ? 'Languages:' : 'Language:'}
+          ${Object.values(languages).join(", ")}
           </li>
       </ul>`
     );
@@ -110,4 +118,8 @@ function drawTemplate(tag, markup) {
 
 function errorWarn() {
     Notify.failure(`Oops, there is no country with that name`);
+}
+
+function errorSpecificLetters() {
+    Notify.warning("Please use only letters, and no doubled space and '-' ");
 }
