@@ -121,5 +121,5 @@ function errorWarn() {
 }
 
 function errorSpecificLetters() {
-    Notify.warning("Please use only letters, and no doubled space and '-' ");
+    Notify.warning("Please use only letters, and '-' ");
 }
